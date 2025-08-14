@@ -86,7 +86,7 @@ export default function PropertyDetail({ id }: PropertyDetailProps) {
                 id: "agent-1",
                 name: "Sarah Johnson",
                 phone: "+94 77 123 4567",
-                email: "sarah.j@salford.lk",
+                email: "sarah.j@primenest.lk",
                 image: "/user-avatar.png",
                 properties: 24,
                 rating: 4.8,
