@@ -119,6 +119,13 @@ export default function Dashboard() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
+            <MobileMenu 
+              user={{
+                name: user.name,
+                email: user.email,
+                image: user.image
+              }}
+            />
             <div className="relative h-8 sm:h-10 md:h-12 w-auto">
               <Image
                 src={logoSrc || "/placeholder.svg"}
