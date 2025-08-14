@@ -46,6 +46,8 @@ export default function PropertyList() {
   const [filteredProperties, setFilteredProperties] = useState<Property[]>([])
   const [loading, setLoading] = useState(true)
   const [propertyType, setPropertyType] = useState("all")
+  const [priceRange, setPriceRange] = useState("all")
+  const [statusFilter, setStatusFilter] = useState("all")
   const [newProperty, setNewProperty] = useState<Partial<Property>>({
     title: "",
     location: "",
