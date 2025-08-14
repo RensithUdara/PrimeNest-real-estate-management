@@ -260,9 +260,8 @@ export default function PropertyDetail({ id }: PropertyDetailProps) {
                   {property.images.map((_, index) => (
                     <button
                       key={index}
-                      className={`w-2 h-2 rounded-full transition-all ${
-                        currentImageIndex === index ? "bg-white scale-125" : "bg-white/50 hover:bg-white/80"
-                      }`}
+                      className={`w-2 h-2 rounded-full transition-all ${currentImageIndex === index ? "bg-white scale-125" : "bg-white/50 hover:bg-white/80"
+                        }`}
                       onClick={() => setCurrentImageIndex(index)}
                     />
                   ))}
@@ -272,9 +271,8 @@ export default function PropertyDetail({ id }: PropertyDetailProps) {
                   <Button
                     variant="outline"
                     size="icon"
-                    className={`bg-background/80 backdrop-blur-sm hover:bg-background ${
-                      isFavorite ? "text-red-500 hover:text-red-600" : ""
-                    }`}
+                    className={`bg-background/80 backdrop-blur-sm hover:bg-background ${isFavorite ? "text-red-500 hover:text-red-600" : ""
+                      }`}
                     onClick={toggleFavorite}
                   >
                     <Heart className={`h-4 w-4 ${isFavorite ? "fill-current" : ""}`} />
@@ -294,12 +292,11 @@ export default function PropertyDetail({ id }: PropertyDetailProps) {
                   <Badge
                     className={`
                       px-3 py-1 text-sm font-medium shadow-sm backdrop-blur-sm
-                      ${
-                        property.status === "For Sale"
-                          ? "bg-green-100/90 text-green-800 dark:bg-green-900/90 dark:text-green-300"
-                          : property.status === "For Rent"
-                            ? "bg-blue-100/90 text-blue-800 dark:bg-blue-900/90 dark:text-blue-300"
-                            : "bg-amber-100/90 text-amber-800 dark:bg-amber-900/90 dark:text-amber-300"
+                      ${property.status === "For Sale"
+                        ? "bg-green-100/90 text-green-800 dark:bg-green-900/90 dark:text-green-300"
+                        : property.status === "For Rent"
+                          ? "bg-blue-100/90 text-blue-800 dark:bg-blue-900/90 dark:text-blue-300"
+                          : "bg-amber-100/90 text-amber-800 dark:bg-amber-900/90 dark:text-amber-300"
                       }
                     `}
                   >
@@ -590,13 +587,12 @@ export default function PropertyDetail({ id }: PropertyDetailProps) {
                         Rs. {similarProperty.price.toLocaleString()}
                       </div>
                       <div
-                        className={`absolute top-2 left-2 px-2 py-1 rounded text-xs font-medium shadow-sm backdrop-blur-sm ${
-                          similarProperty.status === "For Sale"
+                        className={`absolute top-2 left-2 px-2 py-1 rounded text-xs font-medium shadow-sm backdrop-blur-sm ${similarProperty.status === "For Sale"
                             ? "bg-green-100/90 text-green-800"
                             : similarProperty.status === "For Rent"
                               ? "bg-blue-100/90 text-blue-800"
                               : "bg-amber-100/90 text-amber-800"
-                        }`}
+                          }`}
                       >
                         {similarProperty.status}
                       </div>
