@@ -410,75 +410,167 @@ export default function Dashboard() {
                 Map View
               </TabsTrigger>
             </TabsList>
-          <TabsContent value="overview" className="space-y-4">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-              <h2 className="text-xl font-bold">Recent Activity</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg font-medium">Recent Properties</CardTitle>
+            <TabsContent value="overview" className="space-y-6">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} 
+                animate={{ opacity: 1, y: 0 }} 
+                transition={{ duration: 0.5 }}
+                className="space-y-6"
+              >
+                {/* Quick Actions Section */}
+                <Card className="overflow-hidden bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Zap className="h-5 w-5 mr-2 text-primary" />
+                      Quick Actions
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-4">
-                      {recentProperties.map((property, index) => (
-                        <motion.div
-                          key={property.id}
-                          className="flex items-center space-x-3 border-b border-border pb-3 last:border-0 hover:bg-muted/50 p-2 rounded-md transition-colors"
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1 }}
-                        >
-                          <div className="w-12 h-12 rounded-md bg-muted relative overflow-hidden">
-                            <img
-                              src={property.image || "/placeholder.svg"}
-                              alt={property.title}
-                              className="object-cover w-full h-full transition-transform duration-500 hover:scale-110"
-                            />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium truncate">{property.title}</p>
-                            <p className="text-xs text-muted-foreground">{property.location}</p>
-                          </div>
-                          <div className="text-sm font-medium text-green-600 dark:text-green-400">
-                            Rs. {property.price.toLocaleString()}
-                          </div>
-                        </motion.div>
-                      ))}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      <Button variant="outline" className="h-20 flex-col space-y-2 hover:bg-primary/5 hover:border-primary/40 transition-all duration-200">
+                        <Home className="h-6 w-6 text-primary" />
+                        <span className="text-sm font-medium">Add Property</span>
+                      </Button>
+                      <Button variant="outline" className="h-20 flex-col space-y-2 hover:bg-primary/5 hover:border-primary/40 transition-all duration-200">
+                        <Users className="h-6 w-6 text-primary" />
+                        <span className="text-sm font-medium">New Client</span>
+                      </Button>
+                      <Button variant="outline" className="h-20 flex-col space-y-2 hover:bg-primary/5 hover:border-primary/40 transition-all duration-200">
+                        <Calendar className="h-6 w-6 text-primary" />
+                        <span className="text-sm font-medium">Schedule Tour</span>
+                      </Button>
+                      <Button variant="outline" className="h-20 flex-col space-y-2 hover:bg-primary/5 hover:border-primary/40 transition-all duration-200">
+                        <Banknote className="h-6 w-6 text-primary" />
+                        <span className="text-sm font-medium">New Transaction</span>
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
-                <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg font-medium">Recent Clients</CardTitle>
+
+                {/* Recent Activity Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                    <CardHeader className="pb-4">
+                      <CardTitle className="text-xl font-semibold flex items-center">
+                        <Star className="h-5 w-5 mr-2 text-primary" />
+                        Recent Properties
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        {recentProperties.map((property, index) => (
+                          <motion.div
+                            key={property.id}
+                            className="flex items-center space-x-4 p-3 rounded-lg border border-border/50 hover:bg-muted/30 hover:border-primary/20 transition-all duration-300 cursor-pointer group"
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: index * 0.1 }}
+                            whileHover={{ scale: 1.02 }}
+                          >
+                            <div className="w-16 h-16 rounded-xl bg-muted relative overflow-hidden">
+                              <img
+                                src={property.image || "/placeholder.svg"}
+                                alt={property.title}
+                                className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                              />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h4 className="text-sm font-semibold truncate text-foreground group-hover:text-primary transition-colors">{property.title}</h4>
+                              <p className="text-xs text-muted-foreground flex items-center mt-1">
+                                <MapPin className="h-3 w-3 mr-1" />
+                                {property.location}
+                              </p>
+                            </div>
+                            <div className="text-right">
+                              <div className="text-sm font-bold text-primary">
+                                Rs. {(property.price / 1000000).toFixed(1)}M
+                              </div>
+                              <Badge variant="secondary" className="text-xs mt-1">
+                                New
+                              </Badge>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                    <CardHeader className="pb-4">
+                      <CardTitle className="text-xl font-semibold flex items-center">
+                        <Award className="h-5 w-5 mr-2 text-primary" />
+                        Recent Clients
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        {recentClients.map((client, index) => (
+                          <motion.div
+                            key={client.id}
+                            className="flex items-center space-x-4 p-3 rounded-lg border border-border/50 hover:bg-muted/30 hover:border-primary/20 transition-all duration-300 cursor-pointer group"
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: index * 0.1 }}
+                            whileHover={{ scale: 1.02 }}
+                          >
+                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/40 flex items-center justify-center text-primary font-bold text-sm transition-transform duration-300 group-hover:scale-110">
+                              {client.initials}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h4 className="text-sm font-semibold truncate text-foreground group-hover:text-primary transition-colors">{client.name}</h4>
+                              <p className="text-xs text-muted-foreground truncate">{client.email}</p>
+                            </div>
+                            <div className="text-right">
+                              <Badge 
+                                variant="secondary" 
+                                className={`text-xs ${
+                                  client.type === 'Buyer' 
+                                    ? 'bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-900 dark:text-blue-300 dark:border-blue-800' 
+                                    : client.type === 'Seller'
+                                    ? 'bg-green-100 text-green-700 border-green-200 dark:bg-green-900 dark:text-green-300 dark:border-green-800'
+                                    : 'bg-purple-100 text-purple-700 border-purple-200 dark:bg-purple-900 dark:text-purple-300 dark:border-purple-800'
+                                }`}
+                              >
+                                {client.type}
+                              </Badge>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Performance Metrics */}
+                <Card className="overflow-hidden bg-gradient-to-r from-background to-muted/20">
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Target className="h-5 w-5 mr-2 text-primary" />
+                      Performance Overview
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-4">
-                      {recentClients.map((client, index) => (
-                        <motion.div
-                          key={client.id}
-                          className="flex items-center space-x-3 border-b border-border pb-3 last:border-0 hover:bg-muted/50 p-2 rounded-md transition-colors"
-                          initial={{ opacity: 0, x: 20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1 }}
-                        >
-                          <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-foreground font-medium transition-transform duration-300 hover:scale-110">
-                            {client.initials}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium truncate">{client.name}</p>
-                            <p className="text-xs text-muted-foreground">{client.email}</p>
-                          </div>
-                          <div className="text-xs px-2 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300">
-                            {client.type}
-                          </div>
-                        </motion.div>
-                      ))}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div className="text-center p-4 rounded-lg bg-muted/30">
+                        <div className="text-2xl font-bold text-primary mb-2">92%</div>
+                        <div className="text-sm text-muted-foreground">Client Satisfaction</div>
+                        <Progress value={92} className="mt-3 h-2" />
+                      </div>
+                      <div className="text-center p-4 rounded-lg bg-muted/30">
+                        <div className="text-2xl font-bold text-primary mb-2">15.2 days</div>
+                        <div className="text-sm text-muted-foreground">Avg. Sale Time</div>
+                        <Progress value={75} className="mt-3 h-2" />
+                      </div>
+                      <div className="text-center p-4 rounded-lg bg-muted/30">
+                        <div className="text-2xl font-bold text-primary mb-2">₹2.1Cr</div>
+                        <div className="text-sm text-muted-foreground">This Quarter</div>
+                        <Progress value={68} className="mt-3 h-2" />
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
-              </div>
-            </motion.div>
-          </TabsContent>
+              </motion.div>
+            </TabsContent>
           <TabsContent value="properties">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
               <PropertyList />
