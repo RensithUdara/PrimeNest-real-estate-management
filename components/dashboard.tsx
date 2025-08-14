@@ -206,127 +206,210 @@ export default function Dashboard() {
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-6">
+      <main className="container mx-auto px-4 py-8">
+        {/* Welcome Section */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6"
+          className="mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
+            Welcome back, {user.name.split(' ')[0]}! 👋
+          </h1>
+          <p className="text-muted-foreground text-lg">
+            Here's what's happening with your real estate portfolio today.
+          </p>
+        </motion.div>
+
+        {/* Enhanced Stats Cards */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          <motion.div variants={itemVariants}>
-            <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+          <motion.div variants={itemVariants} whileHover="hover">
+            <Card className="overflow-hidden bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 shadow-lg hover:shadow-xl transition-all duration-300">
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-muted-foreground">Total Properties</p>
-                    <h3 className="text-2xl font-bold mt-1">124</h3>
+                    <p className="text-sm font-medium text-muted-foreground">Total Properties</p>
+                    <h3 className="text-3xl font-bold mt-2 text-foreground">124</h3>
+                    <div className="mt-3 flex items-center space-x-2">
+                      <Badge variant="secondary" className="bg-success/10 text-success border-success/20">
+                        <TrendingUp className="h-3 w-3 mr-1" />
+                        +8%
+                      </Badge>
+                      <span className="text-xs text-muted-foreground">vs last month</span>
+                    </div>
                   </div>
-                  <div className="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center transition-transform duration-500 hover:rotate-12">
-                    <Home className="h-6 w-6 text-green-600 dark:text-green-300" />
+                  <div className="relative">
+                    <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center backdrop-blur-sm">
+                      <Home className="h-8 w-8 text-primary" />
+                    </div>
+                    <motion.div
+                      className="absolute inset-0 rounded-full bg-primary/20"
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    />
                   </div>
                 </div>
-                <div className="mt-4 text-xs text-green-600 dark:text-green-400 flex items-center">
-                  <ArrowUp className="h-3 w-3 mr-1" />
-                  <span>+8% from last month</span>
+                <div className="mt-4">
+                  <Progress value={75} className="h-2" />
+                  <p className="text-xs text-muted-foreground mt-1">75% target achieved</p>
                 </div>
               </CardContent>
             </Card>
           </motion.div>
 
-          <motion.div variants={itemVariants}>
-            <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+          <motion.div variants={itemVariants} whileHover="hover">
+            <Card className="overflow-hidden bg-gradient-to-br from-blue-500/5 to-blue-500/10 border-blue-500/20 shadow-lg hover:shadow-xl transition-all duration-300">
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-muted-foreground">Active Clients</p>
-                    <h3 className="text-2xl font-bold mt-1">76</h3>
+                    <p className="text-sm font-medium text-muted-foreground">Active Clients</p>
+                    <h3 className="text-3xl font-bold mt-2 text-foreground">76</h3>
+                    <div className="mt-3 flex items-center space-x-2">
+                      <Badge variant="secondary" className="bg-blue-500/10 text-blue-600 border-blue-500/20">
+                        <ArrowUp className="h-3 w-3 mr-1" />
+                        +12%
+                      </Badge>
+                      <span className="text-xs text-muted-foreground">vs last month</span>
+                    </div>
                   </div>
-                  <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center transition-transform duration-500 hover:rotate-12">
-                    <Users className="h-6 w-6 text-blue-600 dark:text-blue-300" />
+                  <div className="relative">
+                    <div className="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center backdrop-blur-sm">
+                      <Users className="h-8 w-8 text-blue-600" />
+                    </div>
+                    <motion.div
+                      className="absolute inset-0 rounded-full bg-blue-500/20"
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                    />
                   </div>
                 </div>
-                <div className="mt-4 text-xs text-green-600 dark:text-green-400 flex items-center">
-                  <ArrowUp className="h-3 w-3 mr-1" />
-                  <span>+12% from last month</span>
+                <div className="mt-4">
+                  <Progress value={68} className="h-2" />
+                  <p className="text-xs text-muted-foreground mt-1">68% engagement rate</p>
                 </div>
               </CardContent>
             </Card>
           </motion.div>
 
-          <motion.div variants={itemVariants}>
-            <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+          <motion.div variants={itemVariants} whileHover="hover">
+            <Card className="overflow-hidden bg-gradient-to-br from-green-500/5 to-green-500/10 border-green-500/20 shadow-lg hover:shadow-xl transition-all duration-300">
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-muted-foreground">Monthly Revenue</p>
-                    <h3 className="text-2xl font-bold mt-1">Rs. 42.5M</h3>
+                    <p className="text-sm font-medium text-muted-foreground">Monthly Revenue</p>
+                    <h3 className="text-3xl font-bold mt-2 text-foreground">Rs. 42.5M</h3>
+                    <div className="mt-3 flex items-center space-x-2">
+                      <Badge variant="secondary" className="bg-green-500/10 text-green-600 border-green-500/20">
+                        <DollarSign className="h-3 w-3 mr-1" />
+                        +23%
+                      </Badge>
+                      <span className="text-xs text-muted-foreground">vs last month</span>
+                    </div>
                   </div>
-                  <div className="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center transition-transform duration-500 hover:rotate-12">
-                    <Banknote className="h-6 w-6 text-green-600 dark:text-green-300" />
+                  <div className="relative">
+                    <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center backdrop-blur-sm">
+                      <Banknote className="h-8 w-8 text-green-600" />
+                    </div>
+                    <motion.div
+                      className="absolute inset-0 rounded-full bg-green-500/20"
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                    />
                   </div>
                 </div>
-                <div className="mt-4 text-xs text-green-600 dark:text-green-400 flex items-center">
-                  <ArrowUp className="h-3 w-3 mr-1" />
-                  <span>+23% from last month</span>
+                <div className="mt-4">
+                  <Progress value={85} className="h-2" />
+                  <p className="text-xs text-muted-foreground mt-1">85% of monthly target</p>
                 </div>
               </CardContent>
             </Card>
           </motion.div>
 
-          <motion.div variants={itemVariants}>
-            <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+          <motion.div variants={itemVariants} whileHover="hover">
+            <Card className="overflow-hidden bg-gradient-to-br from-amber-500/5 to-amber-500/10 border-amber-500/20 shadow-lg hover:shadow-xl transition-all duration-300">
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-muted-foreground">Pending Deals</p>
-                    <h3 className="text-2xl font-bold mt-1">18</h3>
+                    <p className="text-sm font-medium text-muted-foreground">Pending Deals</p>
+                    <h3 className="text-3xl font-bold mt-2 text-foreground">18</h3>
+                    <div className="mt-3 flex items-center space-x-2">
+                      <Badge variant="secondary" className="bg-amber-500/10 text-amber-600 border-amber-500/20">
+                        <Activity className="h-3 w-3 mr-1" />
+                        +4%
+                      </Badge>
+                      <span className="text-xs text-muted-foreground">vs last month</span>
+                    </div>
                   </div>
-                  <div className="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900 flex items-center justify-center transition-transform duration-500 hover:rotate-12">
-                    <BarChart3 className="h-6 w-6 text-amber-600 dark:text-amber-300" />
+                  <div className="relative">
+                    <div className="w-16 h-16 rounded-full bg-amber-500/20 flex items-center justify-center backdrop-blur-sm">
+                      <BarChart3 className="h-8 w-8 text-amber-600" />
+                    </div>
+                    <motion.div
+                      className="absolute inset-0 rounded-full bg-amber-500/20"
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+                    />
                   </div>
                 </div>
-                <div className="mt-4 text-xs text-green-600 dark:text-green-400 flex items-center">
-                  <ArrowUp className="h-3 w-3 mr-1" />
-                  <span>+4% from last month</span>
+                <div className="mt-4">
+                  <Progress value={45} className="h-2" />
+                  <p className="text-xs text-muted-foreground mt-1">45% conversion rate</p>
                 </div>
               </CardContent>
             </Card>
           </motion.div>
         </motion.div>
 
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
-          <TabsList className="grid grid-cols-5 md:w-[600px] p-1 bg-muted/80 backdrop-blur-sm">
-            <TabsTrigger
-              value="overview"
-              className="data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm transition-all duration-200"
-            >
-              Overview
-            </TabsTrigger>
-            <TabsTrigger
-              value="properties"
-              className="data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm transition-all duration-200"
-            >
-              Properties
-            </TabsTrigger>
-            <TabsTrigger
-              value="clients"
-              className="data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm transition-all duration-200"
-            >
-              Clients
-            </TabsTrigger>
-            <TabsTrigger
-              value="transactions"
-              className="data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm transition-all duration-200"
-            >
-              Transactions
-            </TabsTrigger>
-            <TabsTrigger
-              value="map"
-              className="data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm transition-all duration-200"
-            >
-              Map View
-            </TabsTrigger>
-          </TabsList>
+        {/* Enhanced Tabs Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+            <TabsList className="grid grid-cols-5 md:w-[700px] p-1.5 bg-muted/50 backdrop-blur-sm rounded-xl border border-border/50">
+              <TabsTrigger
+                value="overview"
+                className="data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-lg transition-all duration-300 rounded-lg font-medium"
+              >
+                <Home className="h-4 w-4 mr-2" />
+                Overview
+              </TabsTrigger>
+              <TabsTrigger
+                value="properties"
+                className="data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-lg transition-all duration-300 rounded-lg font-medium"
+              >
+                <Home className="h-4 w-4 mr-2" />
+                Properties
+              </TabsTrigger>
+              <TabsTrigger
+                value="clients"
+                className="data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-lg transition-all duration-300 rounded-lg font-medium"
+              >
+                <Users className="h-4 w-4 mr-2" />
+                Clients
+              </TabsTrigger>
+              <TabsTrigger
+                value="transactions"
+                className="data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-lg transition-all duration-300 rounded-lg font-medium"
+              >
+                <Banknote className="h-4 w-4 mr-2" />
+                Transactions
+              </TabsTrigger>
+              <TabsTrigger
+                value="map"
+                className="data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-lg transition-all duration-300 rounded-lg font-medium"
+              >
+                <BarChart3 className="h-4 w-4 mr-2" />
+                Map View
+              </TabsTrigger>
+            </TabsList>
           <TabsContent value="overview" className="space-y-4">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
               <h2 className="text-xl font-bold">Recent Activity</h2>
