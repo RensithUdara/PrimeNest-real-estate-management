@@ -81,28 +81,15 @@ export default function Dashboard() {
       y: 0,
       opacity: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 120,
         damping: 20,
       },
     },
-  }
-
-  const statCardVariants = {
-    hidden: { scale: 0.8, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
-      },
-    },
     hover: {
-      scale: 1.05,
+      scale: 1.03,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400,
         damping: 10,
       },
@@ -198,7 +185,13 @@ export default function Dashboard() {
               </Button>
             )}
             <Button variant="ghost" size="icon" className="rounded-full relative hover:bg-primary/5 transition-all duration-200">
-              <NotificationCenter />
+              <Bell className="h-5 w-5 text-foreground/70" />
+              <span className="sr-only">Notifications</span>
+              <motion.span
+                className="absolute top-1 right-1 h-2 w-2 rounded-full bg-red-500"
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              />
             </Button>
             <UserProfileMenu
               userName={user.name}
