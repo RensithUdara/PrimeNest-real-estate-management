@@ -106,7 +106,7 @@ export default function PropertyList() {
     fetchProperties()
   }, [])
 
-  // Filter properties based on search query and property type
+  // Enhanced filter properties function
   useEffect(() => {
     let filtered = [...properties]
 
@@ -114,24 +114,61 @@ export default function PropertyList() {
     if (searchQuery) {
       const query = searchQuery.toLowerCase()
       filtered = filtered.filter(
-        (property) => property.title.toLowerCase().includes(query) || property.location.toLowerCase().includes(query),
+        (property) => 
+          property.title.toLowerCase().includes(query) || 
+          property.location.toLowerCase().includes(query) ||
+          property.description?.toLowerCase().includes(query)
       )
     }
 
     // Filter by property type
     if (propertyType !== "all") {
       filtered = filtered.filter((property) => {
-        if (propertyType === "house")
-          return property.title.toLowerCase().includes("house") || property.title.toLowerCase().includes("home")
-        if (propertyType === "apartment") return property.title.toLowerCase().includes("apartment")
-        if (propertyType === "villa") return property.title.toLowerCase().includes("villa")
-        if (propertyType === "land") return property.title.toLowerCase().includes("land")
-        return true
+        const title = property.title.toLowerCase()
+        switch (propertyType) {
+          case "house":
+            return title.includes("house") || title.includes("home")
+          case "apartment":
+            return title.includes("apartment")
+          case "villa":
+            return title.includes("villa")
+          case "land":
+            return title.includes("land")
+          case "commercial":
+            return title.includes("commercial") || title.includes("office")
+          default:
+            return true
+        }
       })
     }
 
+    // Filter by price range
+    if (priceRange !== "all") {
+      filtered = filtered.filter((property) => {
+        switch (priceRange) {
+          case "under-50m":
+            return property.price < 50000000
+          case "50m-100m":
+            return property.price >= 50000000 && property.price < 100000000
+          case "100m-200m":
+            return property.price >= 100000000 && property.price < 200000000
+          case "over-200m":
+            return property.price >= 200000000
+          default:
+            return true
+        }
+      })
+    }
+
+    // Filter by status
+    if (statusFilter !== "all") {
+      filtered = filtered.filter((property) => 
+        property.status.toLowerCase().replace(" ", "-") === statusFilter
+      )
+    }
+
     setFilteredProperties(filtered)
-  }, [searchQuery, propertyType, properties])
+  }, [searchQuery, propertyType, priceRange, statusFilter, properties])
 
   const handleAddProperty = async () => {
     try {
