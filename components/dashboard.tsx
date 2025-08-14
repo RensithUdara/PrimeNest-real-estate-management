@@ -7,7 +7,7 @@ import ClientList from "./client-list"
 import TransactionList from "./transaction-list"
 import MapView from "./map-view"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { BarChart3, Home, Users, Banknote, Bell, ArrowUp } from "lucide-react"
+import { BarChart3, Home, Users, Banknote, Bell, ArrowUp, TrendingUp, DollarSign, Activity, Calendar, Star, Award, Target, Zap } from "lucide-react"
 import Image from "next/image"
 import { ThemeToggle } from "./theme-toggle"
 import { useTheme } from "next-themes"
@@ -16,6 +16,8 @@ import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import { useComparison } from "@/context/comparison-context"
 import { useRouter } from "next/navigation"
+import { Badge } from "@/components/ui/badge"
+import { Progress } from "@/components/ui/progress"
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("overview")
@@ -58,104 +60,141 @@ export default function Dashboard() {
     })
   }
 
-  // Animation variants
+  // Enhanced animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
+        delayChildren: 0.1,
       },
     },
   }
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
         type: "spring",
+        stiffness: 120,
+        damping: 20,
+      },
+    },
+  }
+
+  const statCardVariants = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        type: "spring",
         stiffness: 100,
-        damping: 12,
+        damping: 15,
+      },
+    },
+    hover: {
+      scale: 1.05,
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 10,
       },
     },
   }
 
   return (
-    <div className="flex flex-col w-full min-h-screen">
-      <header className="bg-background border-b border-border shadow-sm sticky top-0 z-50 backdrop-blur-sm bg-background/90">
-        <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-4 flex justify-between items-center">
-          <div className="flex items-center space-x-2">
+    <div className="flex flex-col w-full min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+      <header className="glass-effect dark:glass-effect-dark border-b border-border/50 shadow-lg sticky top-0 z-50">
+        <div className="container mx-auto px-2 sm:px-4 py-3 sm:py-4 flex justify-between items-center">
+          <motion.div
+            className="flex items-center space-x-3"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             <div className="relative h-8 sm:h-10 md:h-12 w-auto">
               <Image
                 src={logoSrc || "/placeholder.svg"}
                 alt="PrimeNest Real Estate"
                 width={200}
                 height={60}
-                className="object-contain h-full w-auto transition-all duration-300 hover:scale-105"
+                className="object-contain h-full w-auto transition-all duration-300 hover:scale-105 drop-shadow-sm"
                 priority
               />
             </div>
-          </div>
-          <nav className="hidden md:flex space-x-4">
-            <a href="#" className="px-3 py-2 text-foreground/80 hover:text-green-600 transition-colors relative group">
+            <div className="hidden lg:block">
+              <Badge variant="secondary" className="text-xs font-medium bg-primary/10 text-primary border-primary/20">
+                Premium Dashboard
+              </Badge>
+            </div>
+          </motion.div>
+          <motion.nav
+            className="hidden md:flex space-x-1"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <a href="#" className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-primary transition-all duration-200 relative group rounded-lg hover:bg-primary/5">
               Dashboard
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-green-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-full"></span>
             </a>
-            <a href="#" className="px-3 py-2 text-foreground/80 hover:text-green-600 transition-colors relative group">
+            <a href="#" className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-primary transition-all duration-200 relative group rounded-lg hover:bg-primary/5">
               Properties
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-green-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-full"></span>
             </a>
-            <a href="#" className="px-3 py-2 text-foreground/80 hover:text-green-600 transition-colors relative group">
+            <a href="#" className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-primary transition-all duration-200 relative group rounded-lg hover:bg-primary/5">
               Clients
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-green-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-full"></span>
             </a>
-            <a href="#" className="px-3 py-2 text-foreground/80 hover:text-green-600 transition-colors relative group">
+            <a href="#" className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-primary transition-all duration-200 relative group rounded-lg hover:bg-primary/5">
               Transactions
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-green-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-full"></span>
             </a>
-            <a href="#" className="px-3 py-2 text-foreground/80 hover:text-green-600 transition-colors relative group">
-              Reports
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-green-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+            <a href="#" className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-primary transition-all duration-200 relative group rounded-lg hover:bg-primary/5">
+              Analytics
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-full"></span>
             </a>
-          </nav>
-          <div className="flex items-center space-x-3">
+          </motion.nav>
+          <motion.div
+            className="flex items-center space-x-3"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
             <ThemeToggle />
             {comparisonList.length > 0 && (
               <Button
                 variant="outline"
                 size="sm"
-                className="rounded-full relative"
+                className="rounded-full relative bg-background/50 backdrop-blur-sm border-primary/20 hover:bg-primary/5 hover:border-primary/40 transition-all duration-200"
                 onClick={() => router.push("/comparison")}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="h-5 w-5 text-foreground/70"
-                >
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
+                <BarChart3 className="h-4 w-4 text-primary" />
                 <span className="sr-only">Compare Properties</span>
                 {comparisonList.length > 0 && (
-                  <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center">
+                  <motion.span
+                    className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center font-medium"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 15 }}
+                  >
                     {comparisonList.length}
-                  </span>
+                  </motion.span>
                 )}
               </Button>
             )}
-            <Button variant="ghost" size="icon" className="rounded-full relative">
+            <Button variant="ghost" size="icon" className="rounded-full relative hover:bg-primary/5 transition-all duration-200">
               <Bell className="h-5 w-5 text-foreground/70" />
               <span className="sr-only">Notifications</span>
-              <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-red-500 animate-pulse"></span>
+              <motion.span
+                className="absolute top-1 right-1 h-2 w-2 rounded-full bg-red-500"
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              />
             </Button>
             <UserProfileMenu
               userName={user.name}
@@ -163,7 +202,7 @@ export default function Dashboard() {
               userInitials={user.initials}
               userImage={user.image}
             />
-          </div>
+          </motion.div>
         </div>
       </header>
 
