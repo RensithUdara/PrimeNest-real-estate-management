@@ -7,7 +7,7 @@ import ClientList from "./client-list"
 import TransactionList from "./transaction-list"
 import MapView from "./map-view"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { BarChart3, Home, Users, Banknote, Bell, ArrowUp, TrendingUp, DollarSign, Activity, Calendar, Star, Award, Target, Zap } from "lucide-react"
+import { BarChart3, Home, Users, Banknote, Bell, ArrowUp, TrendingUp, DollarSign, Activity, Calendar, Star, Award, Target, Zap, MapPin } from "lucide-react"
 import Image from "next/image"
 import { ThemeToggle } from "./theme-toggle"
 import { useTheme } from "next-themes"
@@ -20,6 +20,7 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import FloatingActionButton from "./ui/floating-action-button"
 import NotificationCenter from "./ui/notification-center"
+import MobileMenu from "./ui/mobile-menu"
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("overview")
@@ -606,6 +607,26 @@ export default function Dashboard() {
           <ArrowUp className="h-6 w-6" />
         </motion.button>
       )}
+
+      {/* Floating Action Button */}
+      <FloatingActionButton
+        onAddProperty={() => {
+          // Handle add property action
+          console.log("Add property clicked")
+        }}
+        onAddClient={() => {
+          // Handle add client action
+          console.log("Add client clicked")
+        }}
+        onScheduleTour={() => {
+          // Handle schedule tour action
+          console.log("Schedule tour clicked")
+        }}
+        onContact={() => {
+          // Handle contact action
+          console.log("Contact clicked")
+        }}
+      />
     </div>
   )
 }
