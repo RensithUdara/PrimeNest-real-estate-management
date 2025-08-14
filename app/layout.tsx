@@ -9,7 +9,7 @@ import { ComparisonProvider } from "@/context/comparison-context"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Salford & Co. Real Estate",
+  title: "PrimeNest Real Estate",
   description: "Sri Lanka's premier real estate management platform",
   generator: "v0.dev",
 }

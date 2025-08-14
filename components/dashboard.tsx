@@ -46,7 +46,7 @@ export default function Dashboard() {
   // User information
   const user = {
     name: "Jayantha Dissanayake",
-    email: "jayantha.d@salford.lk",
+    email: "jayantha.d@primenest.lk",
     initials: "JD",
     image: "/user-avatar.png",
   }
@@ -90,7 +90,7 @@ export default function Dashboard() {
             <div className="relative h-8 sm:h-10 md:h-12 w-auto">
               <Image
                 src={logoSrc || "/placeholder.svg"}
-                alt="Salford & Co. Real Estate"
+                alt="PrimeNest Real Estate"
                 width={200}
                 height={60}
                 className="object-contain h-full w-auto transition-all duration-300 hover:scale-105"
