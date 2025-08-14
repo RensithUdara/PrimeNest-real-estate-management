@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: PropertyPageProps): Promise<M
   // In a real app, fetch the property data from API
   // For now, we'll use a placeholder title
   return {
-    title: `Property Details | Salford & Co. Real Estate`,
+    title: `Property Details | PrimeNest Real Estate`,
     description: "View detailed information about this property",
   }
 }
