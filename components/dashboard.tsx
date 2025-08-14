@@ -571,41 +571,43 @@ export default function Dashboard() {
                 </Card>
               </motion.div>
             </TabsContent>
-          <TabsContent value="properties">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-              <PropertyList />
-            </motion.div>
-          </TabsContent>
-          <TabsContent value="clients">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-              <ClientList />
-            </motion.div>
-          </TabsContent>
-          <TabsContent value="transactions">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-              <TransactionList />
-            </motion.div>
-          </TabsContent>
-          <TabsContent value="map">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-              <MapView />
-            </motion.div>
-          </TabsContent>
-        </Tabs>
-      </div>
+            <TabsContent value="properties">
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+                <PropertyList />
+              </motion.div>
+            </TabsContent>
+            <TabsContent value="clients">
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+                <ClientList />
+              </motion.div>
+            </TabsContent>
+            <TabsContent value="transactions">
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+                <TransactionList />
+              </motion.div>
+            </TabsContent>
+            <TabsContent value="map">
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+                <MapView />
+              </motion.div>
+            </TabsContent>
+          </Tabs>
+        </motion.div>
+      </main>
 
-      {/* Scroll to top button */}
+      {/* Enhanced Scroll to Top Button */}
       {showScrollTop && (
         <motion.button
-          className="fixed bottom-6 right-6 p-3 rounded-full bg-primary text-primary-foreground shadow-lg z-50"
+          className="fixed bottom-8 right-8 p-4 rounded-full bg-primary text-primary-foreground shadow-xl z-50 backdrop-blur-sm border border-primary/20 hover:shadow-2xl"
           onClick={scrollToTop}
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.5 }}
-          whileHover={{ scale: 1.1 }}
+          initial={{ opacity: 0, scale: 0.5, y: 100 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.5, y: 100 }}
+          whileHover={{ scale: 1.1, rotate: 15 }}
           whileTap={{ scale: 0.9 }}
+          transition={{ type: "spring", stiffness: 260, damping: 20 }}
         >
-          <ArrowUp className="h-5 w-5" />
+          <ArrowUp className="h-6 w-6" />
         </motion.button>
       )}
     </div>
