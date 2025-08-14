@@ -18,6 +18,8 @@ import { useComparison } from "@/context/comparison-context"
 import { useRouter } from "next/navigation"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
+import FloatingActionButton from "./ui/floating-action-button"
+import NotificationCenter from "./ui/notification-center"
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("overview")
@@ -188,13 +190,7 @@ export default function Dashboard() {
               </Button>
             )}
             <Button variant="ghost" size="icon" className="rounded-full relative hover:bg-primary/5 transition-all duration-200">
-              <Bell className="h-5 w-5 text-foreground/70" />
-              <span className="sr-only">Notifications</span>
-              <motion.span
-                className="absolute top-1 right-1 h-2 w-2 rounded-full bg-red-500"
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              />
+              <NotificationCenter />
             </Button>
             <UserProfileMenu
               userName={user.name}
