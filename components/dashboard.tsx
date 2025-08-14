@@ -18,6 +18,8 @@ import { useComparison } from "@/context/comparison-context"
 import { useRouter } from "next/navigation"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
+import FloatingActionButton from "./ui/floating-action-button"
+import NotificationCenter from "./ui/notification-center"
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("overview")
